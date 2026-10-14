@@ -74,15 +74,19 @@ you turn it back on.
 
 - **Production started**: the inverter has produced for 5 minutes after a
   pause. The flicker of dawn fires nothing: once a day as a rule.
-- **Production stopped**: no production for 15 minutes. `{{energy_today}}`
-  holds the energy of the day, for an evening summary.
+- **Production stopped**: no production for 15 minutes.
+  `{{triggerEvent.data.energy_today}}` holds the energy of the day, for an
+  evening summary.
 - **Inverter alarm**: a new entry in the inverter's event log, with
-  `{{alarm}}` (the message in English) and `{{code}}`. The daily entries
-  (start, "no input" at dusk) are left out.
+  `{{triggerEvent.data.alarm}}` (the message in English) and
+  `{{triggerEvent.data.code}}`. The daily entries (start, "no input" at
+  dusk) are left out.
 
 Leave the inverter empty to react to any of them. The **solar production**
-action gives `{{power}}`, `{{energy_today}}`, `{{energy_total}}`,
-`{{producing}}` and `{{sleeping}}` for a message or a condition.
+action gives `power`, `energy_today`, `energy_total`, `producing` and
+`sleeping` for a message or a condition. The following actions of the scene
+find them in their variable list (written `{{<step>.<action>.<key>}}`, for
+instance `{{0.0.power}}` when this action is the first of the scene).
 
 ## Troubleshooting
 

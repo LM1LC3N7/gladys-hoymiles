@@ -80,16 +80,19 @@ onduleur arrête sa production jusqu'à ce que vous le rallumiez.
   pause. Le scintillement de l'aube ne déclenche rien : une fois par jour en
   général.
 - **Production arrêtée** : aucune production depuis 15 minutes.
-  `{{energy_today}}` contient l'énergie du jour, pour un bilan du soir.
+  `{{triggerEvent.data.energy_today}}` contient l'énergie du jour, pour un
+  bilan du soir.
 - **Alarme d'onduleur** : une nouvelle entrée dans le journal d'événements de
-  l'onduleur, avec `{{alarm}}` (le message, en anglais) et `{{code}}`. Les
-  entrées quotidiennes (démarrage, « aucune entrée » au crépuscule) sont
-  ignorées.
+  l'onduleur, avec `{{triggerEvent.data.alarm}}` (le message, en anglais) et
+  `{{triggerEvent.data.code}}`. Les entrées quotidiennes (démarrage, « aucune
+  entrée » au crépuscule) sont ignorées.
 
 Laissez l'onduleur vide pour réagir à n'importe lequel. L'action
-**production solaire** donne `{{power}}`, `{{energy_today}}`,
-`{{energy_total}}`, `{{producing}}` et `{{sleeping}}` pour un message ou une
-condition.
+**production solaire** donne `power`, `energy_today`, `energy_total`,
+`producing` et `sleeping` pour un message ou une condition. Les actions
+suivantes de la scène les trouvent dans leur liste de variables (écrites
+`{{<étape>.<action>.<clé>}}`, par exemple `{{0.0.power}}` quand cette action
+est la première de la scène).
 
 ## Dépannage
 
