@@ -1,0 +1,154 @@
+{
+  "inverters": [
+    {
+      "serial": "114190000001",
+      "name": "Balcony",
+      "order": 0,
+      "data_age": 3,
+      "data_age_ms": 3012,
+      "poll_enabled": true,
+      "reachable": true,
+      "producing": true,
+      "limit_relative": 100,
+      "limit_absolute": 800,
+      "radio_stats": {
+        "tx_request": 1520,
+        "tx_re_request": 31,
+        "rx_success": 1489,
+        "rx_fail_nothing": 12,
+        "rx_fail_partial": 7,
+        "rx_fail_corrupt": 2,
+        "rssi": -62
+      },
+      "AC": {
+        "0": {
+          "Power": { "v": 405.2, "u": "W", "d": 1 },
+          "Voltage": { "v": 231.4, "u": "V", "d": 1 },
+          "Current": { "v": 1.75, "u": "A", "d": 2 },
+          "Frequency": { "v": 50.01, "u": "Hz", "d": 2 },
+          "PowerFactor": { "v": 0.999, "u": "", "d": 3 },
+          "ReactivePower": { "v": 2.1, "u": "var", "d": 1 }
+        }
+      },
+      "DC": {
+        "0": {
+          "name": { "u": "South" },
+          "Power": { "v": 212.4, "u": "W", "d": 1 },
+          "Voltage": { "v": 33.1, "u": "V", "d": 1 },
+          "Current": { "v": 6.42, "u": "A", "d": 2 },
+          "YieldDay": { "v": 1201, "u": "Wh", "d": 0 },
+          "YieldTotal": { "v": 834.261, "u": "kWh", "d": 3 },
+          "Irradiation": { "v": 51.181, "u": "%", "d": 3, "max": 415 }
+        },
+        "1": {
+          "name": { "u": "" },
+          "Power": { "v": 208.4, "u": "W", "d": 1 },
+          "Voltage": { "v": 32.8, "u": "V", "d": 1 },
+          "Current": { "v": 6.35, "u": "A", "d": 2 },
+          "YieldDay": { "v": 1183, "u": "Wh", "d": 0 },
+          "YieldTotal": { "v": 832.746, "u": "kWh", "d": 3 },
+          "Irradiation": { "v": 50.217, "u": "%", "d": 3, "max": 415 }
+        }
+      },
+      "INV": {
+        "0": {
+          "Power DC": { "v": 420.8, "u": "W", "d": 1 },
+          "YieldDay": { "v": 2384, "u": "Wh", "d": 0 },
+          "YieldTotal": { "v": 1667.007, "u": "kWh", "d": 3 },
+          "Temperature": { "v": 38.4, "u": "°C", "d": 1 },
+          "Efficiency": { "v": 96.293, "u": "%", "d": 3 }
+        }
+      },
+      "events": 3
+    },
+    {
+      "serial": "116190000002",
+      "name": "Garage",
+      "order": 1,
+      "data_age": 7,
+      "data_age_ms": 6540,
+      "poll_enabled": true,
+      "reachable": true,
+      "producing": true,
+      "limit_relative": 75,
+      "limit_absolute": 1125,
+      "radio_stats": {
+        "tx_request": 1498,
+        "tx_re_request": 44,
+        "rx_success": 1460,
+        "rx_fail_nothing": 21,
+        "rx_fail_partial": 11,
+        "rx_fail_corrupt": 6,
+        "rssi": -71
+      },
+      "AC": {
+        "0": {
+          "Power": { "v": 607.1, "u": "W", "d": 1 },
+          "Voltage": { "v": 231.9, "u": "V", "d": 1 },
+          "Current": { "v": 2.62, "u": "A", "d": 2 },
+          "Frequency": { "v": 50.01, "u": "Hz", "d": 2 },
+          "PowerFactor": { "v": 1, "u": "", "d": 3 },
+          "ReactivePower": { "v": 1.2, "u": "var", "d": 1 }
+        }
+      },
+      "DC": {
+        "0": {
+          "name": { "u": "East 1" },
+          "Power": { "v": 160.2, "u": "W", "d": 1 },
+          "Voltage": { "v": 31.2, "u": "V", "d": 1 },
+          "Current": { "v": 5.13, "u": "A", "d": 2 },
+          "YieldDay": { "v": 260, "u": "Wh", "d": 0 },
+          "YieldTotal": { "v": 212.408, "u": "kWh", "d": 3 },
+          "Irradiation": { "v": 38.6, "u": "%", "d": 3, "max": 415 }
+        },
+        "1": {
+          "name": { "u": "East 2" },
+          "Power": { "v": 158.9, "u": "W", "d": 1 },
+          "Voltage": { "v": 31.0, "u": "V", "d": 1 },
+          "Current": { "v": 5.12, "u": "A", "d": 2 },
+          "YieldDay": { "v": 258, "u": "Wh", "d": 0 },
+          "YieldTotal": { "v": 211.902, "u": "kWh", "d": 3 },
+          "Irradiation": { "v": 38.289, "u": "%", "d": 3, "max": 415 }
+        },
+        "2": {
+          "name": { "u": "West 1" },
+          "Power": { "v": 152.3, "u": "W", "d": 1 },
+          "Voltage": { "v": 30.4, "u": "V", "d": 1 },
+          "Current": { "v": 5.01, "u": "A", "d": 2 },
+          "YieldDay": { "v": 255, "u": "Wh", "d": 0 },
+          "YieldTotal": { "v": 209.117, "u": "kWh", "d": 3 },
+          "Irradiation": { "v": 36.699, "u": "%", "d": 3, "max": 415 }
+        },
+        "3": {
+          "name": { "u": "West 2" },
+          "Power": { "v": 155.6, "u": "W", "d": 1 },
+          "Voltage": { "v": 30.6, "u": "V", "d": 1 },
+          "Current": { "v": 5.08, "u": "A", "d": 2 },
+          "YieldDay": { "v": 264, "u": "Wh", "d": 0 },
+          "YieldTotal": { "v": 210.178, "u": "kWh", "d": 3 }
+        }
+      },
+      "INV": {
+        "0": {
+          "Power DC": { "v": 627.0, "u": "W", "d": 1 },
+          "YieldDay": { "v": 1037, "u": "Wh", "d": 0 },
+          "YieldTotal": { "v": 843.605, "u": "kWh", "d": 3 },
+          "Temperature": { "v": 41.2, "u": "°C", "d": 1 },
+          "Efficiency": { "v": 96.826, "u": "%", "d": 3 }
+        }
+      },
+      "events": 2
+    }
+  ],
+  "total": {
+    "Power": { "v": 1012.3, "u": "W", "d": 1 },
+    "YieldDay": { "v": 3421, "u": "Wh", "d": 0 },
+    "YieldTotal": { "v": 2510.612, "u": "kWh", "d": 3 }
+  },
+  "hints": {
+    "time_sync": false,
+    "radio_problem": false,
+    "default_password": false,
+    "pin_mapping_issue": false
+  }
+}

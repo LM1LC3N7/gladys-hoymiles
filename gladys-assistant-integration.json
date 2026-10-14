@@ -1,0 +1,306 @@
+{
+  "manifest_version": 1,
+  "type": "device",
+  "name": "Hoymiles (OpenDTU)",
+  "description": {
+    "en": "Unofficial connector: Hoymiles micro-inverters through OpenDTU, solar production, power limit.",
+    "fr": "Connecteur non officiel : micro-onduleurs Hoymiles via OpenDTU, production solaire, limite."
+  },
+  "version": "0.1.0",
+  "docker_image": "ghcr.io/lm1lc3n7/gladys-hoymiles:0.1.0",
+  "gladys_version": ">=5.1.0",
+  "cover_image": "https://raw.githubusercontent.com/LM1LC3N7/gladys-hoymiles/main/cover.png",
+  "categories": ["energy"],
+  "transports": ["local"],
+  "config_schema": [
+    {
+      "key": "intro",
+      "type": "section",
+      "label": { "en": "Hoymiles through OpenDTU", "fr": "Hoymiles via OpenDTU" },
+      "description": {
+        "en": "Unofficial connector, not affiliated with Hoymiles nor with the OpenDTU project. It reads OpenDTU, the open-source gateway (an ESP32 with an NRF24 or CMT2300A radio) that talks to Hoymiles micro-inverters, on your local network, no cloud: one device per inverter with its power, the power of each panel, the energy of the day and a lifetime index for the energy monitoring, the temperature, the power limit and an on/off switch. At night the inverters sleep: the power reads 0, that is not an error. Scene triggers when production starts or stops and on an inverter alarm, and a dashboard widget. AhoyDTU is not supported.",
+        "fr": "Connecteur non officiel, sans lien avec Hoymiles ni avec le projet OpenDTU. Il lit OpenDTU, la passerelle open source (un ESP32 avec une radio NRF24 ou CMT2300A) qui dialogue avec les micro-onduleurs Hoymiles, sur votre réseau local, sans cloud : un appareil par onduleur avec sa puissance, la puissance de chaque panneau, l'énergie du jour et un index total pour le suivi de l'énergie, la température, la limite de puissance et un interrupteur marche/arrêt. La nuit, les onduleurs dorment : la puissance vaut 0, ce n'est pas une erreur. Des déclencheurs de scène au début et à la fin de la production et sur une alarme d'onduleur, et un widget. AhoyDTU n'est pas pris en charge."
+      },
+      "links": [
+        {
+          "url": "https://www.opendtu.solar/",
+          "label": { "en": "OpenDTU documentation", "fr": "Documentation d'OpenDTU" }
+        },
+        {
+          "url": "https://github.com/LM1LC3N7/gladys-hoymiles/blob/main/docs/fr.md",
+          "label": { "en": "Guide (French)", "fr": "Guide (français)" }
+        },
+        {
+          "url": "https://github.com/LM1LC3N7/gladys-hoymiles/blob/main/docs/en.md",
+          "label": { "en": "Guide (English)", "fr": "Guide (anglais)" }
+        }
+      ]
+    },
+    {
+      "key": "host",
+      "type": "string",
+      "required": true,
+      "label": { "en": "OpenDTU address", "fr": "Adresse de l'OpenDTU" },
+      "description": {
+        "en": "The IP address of OpenDTU on your network (a fixed DHCP lease helps), optionally with a port. Its \"OpenDTU-xxxxxx\" name only works if your DNS knows it: the integration runs in a container that does not see mDNS.",
+        "fr": "L'adresse IP d'OpenDTU sur votre réseau (un bail DHCP fixe aide), avec un port si besoin. Son nom « OpenDTU-xxxxxx » ne fonctionne que si votre DNS le connaît : l'intégration tourne dans un conteneur qui ne voit pas le mDNS."
+      },
+      "placeholder": { "en": "192.168.1.50", "fr": "192.168.1.50" }
+    },
+    {
+      "key": "password",
+      "type": "secret",
+      "required": false,
+      "label": { "en": "OpenDTU admin password", "fr": "Mot de passe admin d'OpenDTU" },
+      "description": {
+        "en": "The password of the OpenDTU web interface (user \"admin\"). Needed to change the power limit and to turn an inverter on or off, and to read when \"Allow read-only access\" is off in OpenDTU. Leave empty to only read. Sent to OpenDTU only, stored encrypted by Gladys.",
+        "fr": "Le mot de passe de l'interface web d'OpenDTU (utilisateur « admin »). Nécessaire pour changer la limite de puissance et allumer ou éteindre un onduleur, et pour lire quand « Autoriser l'accès en lecture seule » est désactivé dans OpenDTU. Laissez vide pour seulement lire. Envoyé à OpenDTU uniquement, stocké chiffré par Gladys."
+      }
+    },
+    {
+      "key": "poll_interval",
+      "type": "number",
+      "required": false,
+      "default": 15,
+      "min": 5,
+      "max": 300,
+      "label": { "en": "Refresh interval (s)", "fr": "Intervalle de rafraîchissement (s)" },
+      "description": {
+        "en": "How often OpenDTU is read during the day. OpenDTU itself polls the inverters every 5 s at best; at night (every inverter asleep) the integration reads it once a minute.",
+        "fr": "Fréquence de lecture d'OpenDTU en journée. OpenDTU interroge lui-même les onduleurs toutes les 5 s au mieux ; la nuit (tous les onduleurs en veille), l'intégration le lit une fois par minute."
+      }
+    }
+  ],
+  "actions": [
+    {
+      "key": "test_connection",
+      "timeout_seconds": 30,
+      "label": { "en": "Test OpenDTU", "fr": "Tester OpenDTU" },
+      "description": {
+        "en": "Reads OpenDTU, lists its inverters and checks the admin password.",
+        "fr": "Lit OpenDTU, liste ses onduleurs et vérifie le mot de passe admin."
+      }
+    }
+  ],
+  "widgets": [
+    {
+      "key": "solar",
+      "label": { "en": "Solar production (Hoymiles)", "fr": "Production solaire (Hoymiles)" },
+      "description": {
+        "en": "Power now, energy today and lifetime, each panel, the power limit and whether the inverter sleeps.",
+        "fr": "Puissance, énergie du jour et totale, chaque panneau, la limite et la veille de l'onduleur."
+      },
+      "icon": "sun",
+      "settings": [
+        {
+          "key": "inverter",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": {
+            "en": "Inverter (empty: all of them)",
+            "fr": "Onduleur (vide : tous)"
+          }
+        }
+      ]
+    }
+  ],
+  "scene_triggers": [
+    {
+      "key": "production_started",
+      "label": { "en": "Hoymiles: production started", "fr": "Hoymiles : production démarrée" },
+      "description": {
+        "en": "An inverter has been producing for 5 minutes after a pause (in the morning, once a day as a rule).",
+        "fr": "Un onduleur produit depuis 5 minutes après une pause (le matin, une fois par jour en général)."
+      },
+      "fields": [
+        {
+          "key": "inverter",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": { "en": "Inverter (empty: any)", "fr": "Onduleur (vide : n'importe lequel)" }
+        }
+      ],
+      "variables": [
+        { "key": "name", "type": "string", "label": { "en": "Inverter", "fr": "Onduleur" } },
+        {
+          "key": "serial",
+          "type": "string",
+          "label": { "en": "Serial number", "fr": "Numéro de série" }
+        },
+        { "key": "power", "type": "number", "label": { "en": "Power (W)", "fr": "Puissance (W)" } },
+        {
+          "key": "energy_today",
+          "type": "number",
+          "label": { "en": "Energy today (kWh)", "fr": "Énergie du jour (kWh)" }
+        }
+      ]
+    },
+    {
+      "key": "production_stopped",
+      "label": { "en": "Hoymiles: production stopped", "fr": "Hoymiles : production arrêtée" },
+      "description": {
+        "en": "An inverter has not produced for 15 minutes (in the evening, once a day as a rule). The energy of the day is in the variables.",
+        "fr": "Un onduleur ne produit plus depuis 15 minutes (le soir, une fois par jour en général). L'énergie du jour est dans les variables."
+      },
+      "fields": [
+        {
+          "key": "inverter",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": { "en": "Inverter (empty: any)", "fr": "Onduleur (vide : n'importe lequel)" }
+        }
+      ],
+      "variables": [
+        { "key": "name", "type": "string", "label": { "en": "Inverter", "fr": "Onduleur" } },
+        {
+          "key": "serial",
+          "type": "string",
+          "label": { "en": "Serial number", "fr": "Numéro de série" }
+        },
+        {
+          "key": "energy_today",
+          "type": "number",
+          "label": { "en": "Energy today (kWh)", "fr": "Énergie du jour (kWh)" }
+        }
+      ]
+    },
+    {
+      "key": "inverter_alarm",
+      "label": { "en": "Hoymiles: inverter alarm", "fr": "Hoymiles : alarme d'onduleur" },
+      "description": {
+        "en": "A new entry in the event log of an inverter (grid overvoltage, over temperature, firmware error...). The daily ones (start, no input at dusk) are left out.",
+        "fr": "Une nouvelle entrée dans le journal d'événements d'un onduleur (surtension du réseau, surchauffe, erreur du micrologiciel...). Les quotidiennes (démarrage, aucune entrée au crépuscule) sont ignorées."
+      },
+      "fields": [
+        {
+          "key": "inverter",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": { "en": "Inverter (empty: any)", "fr": "Onduleur (vide : n'importe lequel)" }
+        }
+      ],
+      "variables": [
+        {
+          "key": "alarm",
+          "type": "string",
+          "label": { "en": "Alarm (English)", "fr": "Alarme (en anglais)" }
+        },
+        {
+          "key": "code",
+          "type": "number",
+          "label": { "en": "Hoymiles event code", "fr": "Code d'événement Hoymiles" }
+        },
+        { "key": "name", "type": "string", "label": { "en": "Inverter", "fr": "Onduleur" } },
+        {
+          "key": "serial",
+          "type": "string",
+          "label": { "en": "Serial number", "fr": "Numéro de série" }
+        }
+      ]
+    }
+  ],
+  "scene_actions": [
+    {
+      "key": "set_power_limit",
+      "label": {
+        "en": "Hoymiles: set the power limit",
+        "fr": "Hoymiles : régler la limite de puissance"
+      },
+      "description": {
+        "en": "A temporary (non-persistent) limit, in watts or percent: the inverter forgets it when it restarts, at the latest the next morning. Needs the admin password and an awake inverter (daytime).",
+        "fr": "Une limite temporaire (non persistante), en watts ou en pourcentage : l'onduleur l'oublie à son redémarrage, au plus tard le lendemain matin. Nécessite le mot de passe admin et un onduleur éveillé (en journée)."
+      },
+      "timeout_seconds": 20,
+      "fields": [
+        {
+          "key": "inverter",
+          "type": "select",
+          "source": "devices",
+          "required": true,
+          "label": { "en": "Inverter", "fr": "Onduleur" }
+        },
+        {
+          "key": "value",
+          "type": "number",
+          "required": true,
+          "min": 0,
+          "max": 2250,
+          "label": { "en": "Limit", "fr": "Limite" }
+        },
+        {
+          "key": "unit",
+          "type": "select",
+          "required": false,
+          "default": "W",
+          "label": { "en": "Unit", "fr": "Unité" },
+          "options": [
+            { "value": "W", "label": { "en": "Watts", "fr": "Watts" } },
+            { "value": "%", "label": { "en": "Percent", "fr": "Pourcentage" } }
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "key": "limit_watts",
+          "type": "number",
+          "label": { "en": "Limit (W)", "fr": "Limite (W)" }
+        },
+        {
+          "key": "limit_percent",
+          "type": "number",
+          "label": { "en": "Limit (%)", "fr": "Limite (%)" }
+        }
+      ]
+    },
+    {
+      "key": "get_production",
+      "label": { "en": "Hoymiles: solar production", "fr": "Hoymiles : production solaire" },
+      "description": {
+        "en": "The production of one inverter or of all of them, for a message or a condition that follows.",
+        "fr": "La production d'un onduleur ou de tous, pour un message ou une condition qui suit."
+      },
+      "timeout_seconds": 20,
+      "fields": [
+        {
+          "key": "inverter",
+          "type": "select",
+          "source": "devices",
+          "required": false,
+          "label": { "en": "Inverter (empty: all of them)", "fr": "Onduleur (vide : tous)" }
+        }
+      ],
+      "outputs": [
+        { "key": "power", "type": "number", "label": { "en": "Power (W)", "fr": "Puissance (W)" } },
+        {
+          "key": "energy_today",
+          "type": "number",
+          "label": { "en": "Energy today (kWh)", "fr": "Énergie du jour (kWh)" }
+        },
+        {
+          "key": "energy_total",
+          "type": "number",
+          "label": { "en": "Lifetime energy (kWh)", "fr": "Énergie totale (kWh)" }
+        },
+        {
+          "key": "producing",
+          "type": "boolean",
+          "label": { "en": "Producing", "fr": "En production" }
+        },
+        {
+          "key": "sleeping",
+          "type": "boolean",
+          "label": { "en": "Sleeping (night)", "fr": "En veille (nuit)" }
+        },
+        {
+          "key": "inverters",
+          "type": "number",
+          "label": { "en": "Inverters counted", "fr": "Onduleurs comptés" }
+        }
+      ]
+    }
+  ]
+}

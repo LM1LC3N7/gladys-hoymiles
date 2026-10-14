@@ -1,0 +1,4 @@
+{
+  "114190000001": { "limit_relative": 100, "max_power": 800, "limit_set_status": "Ok" },
+  "116190000002": { "limit_relative": 75, "max_power": 1500, "limit_set_status": "Ok" }
+}

@@ -1,0 +1,8 @@
+{
+  "count": 3,
+  "events": [
+    { "message_id": 1, "message": "Inverter start", "start_time": 28028, "end_time": 28028 },
+    { "message_id": 209, "message": "PV-1: No input", "start_time": 28036, "end_time": 28140 },
+    { "message_id": 2, "message": "Time calibration", "start_time": 28092, "end_time": 28092 }
+  ]
+}

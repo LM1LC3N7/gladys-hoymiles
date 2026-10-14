@@ -1,0 +1,30 @@
+{
+  "114190000001": {
+    "valid_data": true,
+    "fw_bootloader_version": 10012,
+    "fw_build_version": 10012,
+    "hw_part_number": 269619216,
+    "hw_version": "01.00",
+    "hw_model_name": "HM-800",
+    "max_power": 800,
+    "fw_build_datetime": "2022-06-21 10:23:00",
+    "pdl_supported": false,
+    "rf_valid_data": false,
+    "rf_hw_version": "",
+    "rf_fw_version": ""
+  },
+  "116190000002": {
+    "valid_data": true,
+    "fw_bootloader_version": 10002,
+    "fw_build_version": 10012,
+    "hw_part_number": 269619456,
+    "hw_version": "01.00",
+    "hw_model_name": "HM-1500",
+    "max_power": 1500,
+    "fw_build_datetime": "2022-06-21 10:23:00",
+    "pdl_supported": false,
+    "rf_valid_data": false,
+    "rf_hw_version": "",
+    "rf_fw_version": ""
+  }
+}

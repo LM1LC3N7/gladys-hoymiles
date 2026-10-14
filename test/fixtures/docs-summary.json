@@ -1,0 +1,43 @@
+{
+  "inverters": [
+    {
+      "serial": "116171600001",
+      "name": "Meine Solaranlage",
+      "order": 0,
+      "data_age": 30636,
+      "poll_enabled": true,
+      "reachable": false,
+      "producing": false,
+      "limit_relative": 100,
+      "limit_absolute": 1500
+    },
+    {
+      "serial": "114171600002",
+      "name": "Inverter 2",
+      "order": 0,
+      "data_age": 108349,
+      "poll_enabled": false,
+      "reachable": false,
+      "producing": false,
+      "limit_relative": 0,
+      "limit_absolute": -1
+    },
+    {
+      "serial": "114171600003",
+      "name": "Inverter 3",
+      "order": 0,
+      "data_age": 108349,
+      "poll_enabled": false,
+      "reachable": false,
+      "producing": false,
+      "limit_relative": 0,
+      "limit_absolute": -1
+    }
+  ],
+  "total": {
+    "Power": { "v": 0, "u": "W", "d": 1 },
+    "YieldDay": { "v": 0, "u": "Wh", "d": 0 },
+    "YieldTotal": { "v": 2515.605957, "u": "kWh", "d": 3 }
+  },
+  "hints": { "time_sync": false, "radio_problem": false, "default_password": false }
+}
