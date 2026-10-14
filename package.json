@@ -1,6 +1,6 @@
 {
   "name": "gladys-hoymiles",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Hoymiles micro-inverters for Gladys Assistant through OpenDTU on the local network: live solar production, daily and lifetime energy, per-panel values, power limit, scene triggers and a dashboard widget.",
   "type": "module",

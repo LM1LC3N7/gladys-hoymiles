@@ -10,6 +10,8 @@ the notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-10-14
+
 ### Added
 
 - One device per Hoymiles inverter known to OpenDTU, on the local network:
@@ -29,3 +31,6 @@ the notes of the version's GitHub Release.
 - "Test OpenDTU" button: firmware, inverters, admin password check.
 - Both OpenDTU firmware generations: the live data with the channels inline
   (2023) or per inverter (`?inv=<serial>`, recent ones).
+
+[Unreleased]: https://github.com/LM1LC3N7/gladys-hoymiles/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/LM1LC3N7/gladys-hoymiles/releases/tag/v0.1.1
